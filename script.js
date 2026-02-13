@@ -181,16 +181,22 @@ function saveEdit(li, id) {
     return;
   }
 
-  // Update state
+  // Validate data
   const index = bookmarks.findIndex((b) => b.id === id);
   if (index === -1) {
     alert("Bookmark not found.");
+    return;
+  }
+  if (newName.trim() === "" || newUrl.trim() === "") {
+    alert("Name and URL cannot be empty.");
     return;
   }
   if (!isValidUrl(newUrl)) {
     alert("Please enter a valid URL starting with http:// or https://");
     return;
   }
+
+  // Update state
   bookmarks[index].name = newName;
   bookmarks[index].url = newUrl;
   bookmarks[index].tag = newTag;
