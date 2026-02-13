@@ -1,0 +1,47 @@
+MDN Web Docs
+https://developer.mozilla.org
+docs
+
+GitHub
+https://github.com
+dev
+
+Stack Overflow
+https://stackoverflow.com
+programming
+
+Hacker News
+https://news.ycombinator.com
+news
+
+YouTube
+https://youtube.com
+
+
+Reddit
+https://reddit.com
+community
+
+TypeScript Handbook
+https://www.typescriptlang.org/docs
+typescript
+
+React Documentation
+https://react.dev
+frontend
+
+NPM
+https://www.npmjs.com
+packages
+
+CSS Tricks
+https://css-tricks.com
+css
+
+Google Drive
+https://drive.google.com
+
+
+Wikipedia
+https://wikipedia.org
+reference
