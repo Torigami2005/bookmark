@@ -155,6 +155,10 @@ button:hover {
   white-space: normal;
 }
 
+#bookmark-list a:hover {
+  text-decoration: underline;
+}
+
 .edit-input {
   margin: 2px 0;
   padding: 4px;
