@@ -6,6 +6,16 @@ const bookmarkList = document.getElementById("bookmark-list");
 const searchInput = document.getElementById("search-input");
 const sortSelect = document.getElementById("sort-select");
 
+/**
+ * @typedef {
+ *  id: string,
+ *  name: string,
+ *  url: string,
+ *  tag: string,
+ *  created: number,
+ * } Bookmark
+ */
+
 // State
 /** @type {Bookmark[]} */
 let bookmarks = [];
@@ -101,19 +111,6 @@ function seed() {
   renderBookmarks();
 }
 
-// NOTE: optional
-seed()
-
-/**
- * @typedef {
- *  id: string,
- *  name: string,
- *  url: string,
- *  tag: string,
- *  created: number,
- * } Bookmark
- */
-
 document.addEventListener("DOMContentLoaded", init);
 
 // --- Handlers ---
@@ -179,6 +176,8 @@ sortSelect.addEventListener("change", renderBookmarks);
 // --- Core Functions ---
 
 function init() {
+  // NOTE: optional
+  seed()
   bookmarks = getBookmarksFromStorage();
   renderBookmarks();
 }
