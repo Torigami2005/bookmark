@@ -7,7 +7,102 @@ const searchInput = document.getElementById("search-input");
 const sortSelect = document.getElementById("sort-select");
 
 // State
+/** @type {Bookmark[]} */
 let bookmarks = [];
+
+function seed() {
+  bookmarks = [
+    {
+      id: "1704067200000",
+      name: "MDN Web Docs",
+      url: "https://developer.mozilla.org",
+      tag: "docs",
+      created: 1704067200000,
+    },
+    {
+      id: "1704153600000",
+      name: "GitHub",
+      url: "https://github.com",
+      tag: "dev",
+      created: 1704153600000,
+    },
+    {
+      id: "1704240000000",
+      name: "Stack Overflow",
+      url: "https://stackoverflow.com",
+      tag: "programming",
+      created: 1704240000000,
+    },
+    {
+      id: "1704326400000",
+      name: "Hacker News",
+      url: "https://news.ycombinator.com",
+      tag: "news",
+      created: 1704326400000,
+    },
+    {
+      id: "1704412800000",
+      name: "YouTube",
+      url: "https://youtube.com",
+      tag: "",
+      created: 1704412800000,
+    },
+    {
+      id: "1704499200000",
+      name: "Reddit",
+      url: "https://reddit.com",
+      tag: "community",
+      created: 1704499200000,
+    },
+    {
+      id: "1704585600000",
+      name: "TypeScript Handbook",
+      url: "https://www.typescriptlang.org/docs",
+      tag: "typescript",
+      created: 1704585600000,
+    },
+    {
+      id: "1704672000000",
+      name: "React Documentation",
+      url: "https://react.dev",
+      tag: "frontend",
+      created: 1704672000000,
+    },
+    {
+      id: "1704758400000",
+      name: "NPM",
+      url: "https://www.npmjs.com",
+      tag: "packages",
+      created: 1704758400000,
+    },
+    {
+      id: "1704844800000",
+      name: "CSS Tricks",
+      url: "https://css-tricks.com",
+      tag: "css",
+      created: 1704844800000,
+    },
+    {
+      id: "1704931200000",
+      name: "Google Drive",
+      url: "https://drive.google.com",
+      tag: "",
+      created: 1704931200000,
+    },
+    {
+      id: "1705017600000",
+      name: "Wikipedia",
+      url: "https://wikipedia.org",
+      tag: "reference",
+      created: 1705017600000,
+    },
+  ];
+  saveBookmarks();
+  renderBookmarks();
+}
+
+// NOTE: optional
+seed()
 
 /**
  * @typedef {
@@ -33,7 +128,7 @@ addBookmarkBtn.addEventListener("click", function () {
     alert("Please enter both a name and a URL.");
     return;
   }
-  
+
   if (!isValidUrl(url)) {
     alert("Please enter a valid URL starting with http:// or https://");
     return;
@@ -44,7 +139,7 @@ addBookmarkBtn.addEventListener("click", function () {
     name,
     url,
     tag,
-    created: Date.now()
+    created: Date.now(),
   };
 
   bookmarks.push(newBookmark);
@@ -60,19 +155,17 @@ addBookmarkBtn.addEventListener("click", function () {
 bookmarkList.addEventListener("click", function (e) {
   const li = e.target.closest("li");
   if (!li) return;
-  
+
   const id = li.dataset.id;
   const action = e.target.dataset.action;
 
   if (action === "remove") {
-    bookmarks = bookmarks.filter(b => b.id !== id);
+    bookmarks = bookmarks.filter((b) => b.id !== id);
     saveBookmarks();
     renderBookmarks();
-  } 
-  else if (action === "edit") {
+  } else if (action === "edit") {
     enableEditMode(li, id);
-  }
-  else if (action === "save") {
+  } else if (action === "save") {
     saveEdit(li, id);
   }
 });
@@ -97,14 +190,7 @@ function isValidUrl(url) {
 function getBookmarksFromStorage() {
   const stored = localStorage.getItem("bookmarks");
   let parsed = stored ? JSON.parse(stored) : [];
-  
-  // Migration: Ensure old bookmarks have IDs and timestamps
-  return parsed.map(b => ({
-    ...b,
-    id: b.id || Math.random().toString(36).substr(2, 9),
-    created: b.created || Date.now(),
-    tag: b.tag || ""
-  }));
+  return parsed;
 }
 
 function saveBookmarks() {
@@ -113,12 +199,13 @@ function saveBookmarks() {
 
 function renderBookmarks() {
   bookmarkList.innerHTML = "";
-  
+
   // Filter
   const query = searchInput.value.toLowerCase();
-  let filtered = bookmarks.filter(b => 
-    b.name.toLowerCase().includes(query) || 
-    (b.tag && b.tag.toLowerCase().includes(query))
+  let filtered = bookmarks.filter(
+    (b) =>
+      b.name.toLowerCase().includes(query) ||
+      (b.tag && b.tag.toLowerCase().includes(query)),
   );
 
   // Sort
@@ -131,16 +218,16 @@ function renderBookmarks() {
     return 0;
   });
 
-  // Render 
+  // Render
   filtered.forEach((bookmark) => {
     const li = document.createElement("li");
     li.dataset.id = bookmark.id;
-    
+
     li.innerHTML = `
       <div class="bookmark-content">
         <div class="bookmark-info">
             <a href="${bookmark.url}" target="_blank" class="bookmark-link">${bookmark.name}</a>
-            ${bookmark.tag ? `<span class="tag-badge">${bookmark.tag}</span>` : ''}
+            ${bookmark.tag ? `<span class="tag-badge">${bookmark.tag}</span>` : ""}
         </div>
         <a href="${bookmark.url}" target="_blank" class="bookmark-url">${bookmark.url}</a>
         <div class="actions">
@@ -154,7 +241,7 @@ function renderBookmarks() {
 }
 
 function enableEditMode(li, id) {
-  const bookmark = bookmarks.find(b => b.id === id);
+  const bookmark = bookmarks.find((b) => b.id === id);
   if (!bookmark) return;
 
   const infoDiv = li.querySelector(".bookmark-info");
@@ -164,7 +251,7 @@ function enableEditMode(li, id) {
   infoDiv.innerHTML = `
     <input type="text" class="edit-input edit-name" value="${bookmark.name}" placeholder="Name">
     <input type="text" class="edit-input edit-url" value="${bookmark.url}" placeholder="URL">
-    <input type="text" class="edit-input edit-tag" value="${bookmark.tag || ''}" placeholder="Tag">
+    <input type="text" class="edit-input edit-tag" value="${bookmark.tag || ""}" placeholder="Tag">
   `;
 
   // Change Edit button to Save
@@ -189,7 +276,7 @@ function saveEdit(li, id) {
   }
 
   // Update state
-  const index = bookmarks.findIndex(b => b.id === id);
+  const index = bookmarks.findIndex((b) => b.id === id);
   if (index !== -1) {
     bookmarks[index].name = newName;
     bookmarks[index].url = newUrl;

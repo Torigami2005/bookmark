@@ -1,156 +1,162 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 
 :root {
-    --page-bg: url("https://upload.wikimedia.org/wikipedia/commons/5/50/Avocado_open.jpg");
-    --container-bg: #b5cf79;
-    --primary: #e1e3a6; /* BUTTON*/
-    --secondary: #F0FFCE;
-    --tertiary: #2f4331;
-    --border: #aa402b;
-    --text-primary-0: #694400; /* smaller text */
-    --text-primary-1: #6f4c21; /* "Bookmark SAVER" text */
-    --text-neutral: var(--secondary);
-    --button-bg: var(--text-primary-0);
-    --button-fg: var(--text-neutral);
+  --page-bg: url("https://upload.wikimedia.org/wikipedia/commons/5/50/Avocado_open.jpg");
+  --container-bg: #b5cf79;
+  --primary: #e1e3a6; /* BUTTON*/
+  --secondary: #f0ffce;
+  --tertiary: #2f4331;
+  --border: #aa402b;
+  --text-primary-0: #694400; /* smaller text */
+  --text-primary-1: #6f4c21; /* "Bookmark SAVER" text */
+  --text-neutral: var(--secondary);
+  --button-bg: var(--text-primary-0);
+  --button-fg: var(--text-neutral);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-    background: var(--page-bg);
-    background-size: 100%;
-    color: var(--text-neutral);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+html {
+  background: var(--page-bg);
+  background-size: cover;
 }
 
-.container{
-    background-color: var(--container-bg);
-    padding: 2rem 3rem;
-    border: 6px solid var(--tertiary);
-    border-radius: 2rem;
-    box-shadow: 0 8px 2rem rgba(0, 0, 0, 0.5);
-    width: 90%;
-    max-width: 1000px;
-    text-align: center;
+body {
+  color: var(--text-neutral);
+  padding: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h1{
-    text-transform: uppercase;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: var(--text-primary-1);
-    text-shadow: -2px 2px 0 var(--secondary);
-    letter-spacing: 2px;
+.container {
+  background-color: var(--container-bg);
+  padding: 2rem 3rem;
+  border: 6px solid var(--tertiary);
+  border-radius: 2rem;
+  box-shadow: 0 8px 2rem rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 1000px;
+  text-align: center;
 }
 
-.input-container{
-    display: flex;
-    margin-bottom: 20px;
-    flex-direction: column;
-    gap: 10px;
+h1 {
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--text-primary-1);
+  text-shadow: -2px 2px 0 var(--secondary);
+  letter-spacing: 2px;
 }
 
-input, select{
-    color: var(--text-primary-0);
-    padding: 10px;
-    border: 2px solid var(--border);
-    border-radius: 0.5rem;
+.input-container {
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input,
+select {
+  color: var(--text-primary-0);
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
 }
 
 .controls-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 #search-input {
-    flex: 2;
-    padding: 8px;
+  flex: 2;
+  padding: 8px;
 }
 
 #sort-select {
-    flex: 1;
-    padding: 8px;
+  flex: 1;
+  padding: 8px;
 }
 
-button{
-    border: 1px solid transparent;
-    padding: 5px 10px;
-    border-radius: 4px;
-    background-color: var(--button-bg); /* add bookmark btn */
-    color: var(--button-fg);
-    cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease,
-     border-color 0.3s ease;
+button {
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: var(--button-bg); /* add bookmark btn */
+  color: var(--button-fg);
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
-button:hover{
-    background-color: var(--primary);
-    color: var(--border);
-    border-color: var(--border);
+button:hover {
+  background-color: var(--primary);
+  color: var(--border);
+  border-color: var(--border);
 }
 
-
-#bookmark-list{
-    list-style: none;
-    padding: 0;
+#bookmark-list {
+  list-style: none;
+  padding: 0;
 }
 
-#bookmark-list li{
-    background-color: var(--secondary);
-    padding: 0.75rem 1rem;
-    border-radius: 1rem;
-    border: 1px solid transparent;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+#bookmark-list li {
+  background-color: var(--secondary);
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
 }
 
 .bookmark-content {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bookmark-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .bookmark-url {
-    text-align: left;
+  text-align: left;
 }
 
 .tag-badge {
-    font-size: 0.8em;
-    background-color: var(--text-primary-0);
-    color: var(--secondary);
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-top: 4px;
+  font-size: 0.8em;
+  background-color: var(--text-primary-0);
+  color: var(--secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
 }
 
-#bookmark-list a{
-    color: var(--text-primary-0);
-    text-decoration: none;
-    word-break: break-all;
-    white-space: normal;
+#bookmark-list a {
+  color: var(--text-primary-0);
+  text-decoration: none;
+  word-break: break-all;
+  white-space: normal;
 }
 
 .edit-input {
-    margin: 2px 0;
-    padding: 4px;
-    width: 100%;
+  margin: 2px 0;
+  padding: 4px;
+  width: 100%;
 }
