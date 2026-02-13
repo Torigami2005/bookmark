@@ -20,97 +20,6 @@ const sortSelect = document.getElementById("sort-select");
 /** @type {Bookmark[]} */
 let bookmarks = [];
 
-function seed() {
-  bookmarks = [
-    {
-      id: "1704067200000",
-      name: "MDN Web Docs",
-      url: "https://developer.mozilla.org",
-      tag: "docs",
-      created: 1704067200000,
-    },
-    {
-      id: "1704153600000",
-      name: "GitHub",
-      url: "https://github.com",
-      tag: "dev",
-      created: 1704153600000,
-    },
-    {
-      id: "1704240000000",
-      name: "Stack Overflow",
-      url: "https://stackoverflow.com",
-      tag: "programming",
-      created: 1704240000000,
-    },
-    {
-      id: "1704326400000",
-      name: "Hacker News",
-      url: "https://news.ycombinator.com",
-      tag: "news",
-      created: 1704326400000,
-    },
-    {
-      id: "1704412800000",
-      name: "YouTube",
-      url: "https://youtube.com",
-      tag: "",
-      created: 1704412800000,
-    },
-    {
-      id: "1704499200000",
-      name: "Reddit",
-      url: "https://reddit.com",
-      tag: "community",
-      created: 1704499200000,
-    },
-    {
-      id: "1704585600000",
-      name: "TypeScript Handbook",
-      url: "https://www.typescriptlang.org/docs",
-      tag: "typescript",
-      created: 1704585600000,
-    },
-    {
-      id: "1704672000000",
-      name: "React Documentation",
-      url: "https://react.dev",
-      tag: "frontend",
-      created: 1704672000000,
-    },
-    {
-      id: "1704758400000",
-      name: "NPM",
-      url: "https://www.npmjs.com",
-      tag: "packages",
-      created: 1704758400000,
-    },
-    {
-      id: "1704844800000",
-      name: "CSS Tricks",
-      url: "https://css-tricks.com",
-      tag: "css",
-      created: 1704844800000,
-    },
-    {
-      id: "1704931200000",
-      name: "Google Drive",
-      url: "https://drive.google.com",
-      tag: "",
-      created: 1704931200000,
-    },
-    {
-      id: "1705017600000",
-      name: "Wikipedia",
-      url: "https://wikipedia.org",
-      tag: "reference",
-      created: 1705017600000,
-    },
-  ];
-  saveBookmarks();
-  renderBookmarks();
-}
-
 document.addEventListener("DOMContentLoaded", init);
 
 // --- Handlers ---
@@ -176,8 +85,6 @@ sortSelect.addEventListener("change", renderBookmarks);
 // --- Core Functions ---
 
 function init() {
-  // NOTE: optional
-  seed()
   bookmarks = getBookmarksFromStorage();
   renderBookmarks();
 }
@@ -276,11 +183,17 @@ function saveEdit(li, id) {
 
   // Update state
   const index = bookmarks.findIndex((b) => b.id === id);
-  if (index !== -1) {
-    bookmarks[index].name = newName;
-    bookmarks[index].url = newUrl;
-    bookmarks[index].tag = newTag;
-    saveBookmarks();
-    renderBookmarks();
+  if (index === -1) {
+    alert("Bookmark not found.");
+    return;
   }
+  if (!isValidUrl(newUrl)) {
+    alert("Please enter a valid URL starting with http:// or https://");
+    return;
+  }
+  bookmarks[index].name = newName;
+  bookmarks[index].url = newUrl;
+  bookmarks[index].tag = newTag;
+  saveBookmarks();
+  renderBookmarks();
 }
