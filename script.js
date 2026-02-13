@@ -16,7 +16,7 @@ const sortSelect = document.getElementById("sort-select");
  * } Bookmark
  */
 
-// State
+// State/Data
 /** @type {Bookmark[]} */
 let bookmarks = [];
 
